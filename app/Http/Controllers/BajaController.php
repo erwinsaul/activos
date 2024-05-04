@@ -33,7 +33,7 @@ class BajaController extends Controller
 
             Baja::create([
                 'cantidad' => $request->cantidad,
-                'motivo' => $request->motivo,
+                'motivo' => strtoupper($request->motivo),
                 'fecha' => $request->fecha,
                 'activo_id' => $request->activo_id, 
             ]);

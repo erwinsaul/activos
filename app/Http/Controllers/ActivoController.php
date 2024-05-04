@@ -121,15 +121,24 @@ class ActivoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombre' => 'required|string',
-            'descripcion' => 'required|string',
-            'cantidad_inicial' => 'required|numeric|min:0',
-        ]);
+        try {
 
-        $activo = Activo::findOrFail($id);
-        $activo->update($request->all());
-        return redirect()->route('activos.index')->with('success', 'Activo actualizado correctamente.');
+            $request->validate([
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
+                'cantidad_inicial' => 'required|numeric|min:0',
+            ]);
+    
+            $activo = Activo::findOrFail($id);
+            $activo->update([
+                'nombre' => strtoupper($request->nombre),
+                'descripcion' => strtoupper($request->descripcion),
+                'cantidad_inicial' => $request->cantidad_inicial,]);
+            return redirect()->route('activos.index')->with('success', 'Activo actualizado correctamente.');
+           
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->validator->errors())->withInput();
+        }       
     }
 
     /**

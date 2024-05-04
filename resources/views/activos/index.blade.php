@@ -3,14 +3,17 @@
 @section('content')
 <div class="container">
     <h1>Lista de Activos</h1>
-    <div class="mb-3">
-        <a href="{{ route('activos.create') }}" class="btn btn-success">Agregar Nuevo Activo</a>
-    </div>
-    <div class="mb-3">
-        <a href="{{ route('bajas.index') }}" class="btn btn-secondary">Listar Todas las Bajas</a>
-    </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-6">
+            <a href="{{ route('activos.create') }}" class="btn btn-success">Agregar Nuevo Activo</a>
+        </div>
+        <div class="col-6">
+            <a href="{{ route('bajas.index') }}" class="btn btn-secondary">Listar Todas las Bajas</a>
+        </div> 
+    </div>    
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
             <form action="{{ route('activos.index') }}" method="GET" class="form-inline">
                 <div class="form-group">
                     <input type="text" name="search" class="form-control" placeholder="Buscar Activos">
