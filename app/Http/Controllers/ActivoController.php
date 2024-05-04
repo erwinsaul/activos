@@ -32,7 +32,7 @@ class ActivoController extends Controller
                    ->orWhere('activos.codigo', 'like', '%' . $search . '%');
         }
     
-        $activos = $activos->paginate(10);
+        $activos = $activos->paginate();
             
         return view('activos.index', compact('activos', 'search'));
     }
