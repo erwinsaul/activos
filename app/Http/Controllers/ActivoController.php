@@ -19,23 +19,21 @@ class ActivoController extends Controller
     {
         
         $search = strtoupper($request->input('search'));
-        echo($search);
+        //echo($search);
         $activos = DB::table('activos')
             ->select('activos.*', DB::raw('cantidad_inicial - COALESCE(SUM(bajas.cantidad), 0) AS stock_actual'))
             ->leftJoin('bajas', 'activos.id', '=', 'bajas.activo_id')
             ->groupBy('activos.id', 'activos.nombre', 'activos.descripcion', 'activos.cantidad_inicial')
             ->orderBy('activos.codigo');
     
-        // Aplica el filtro de búsqueda si se proporciona un término de búsqueda
+        
         if ($search) {
             $activos->where('activos.nombre', 'like', '%' . $search . '%')
                    ->orWhere('activos.codigo', 'like', '%' . $search . '%');
         }
     
-        // Ejecuta la consulta y obtén los resultados paginados
         $activos = $activos->paginate(10);
-    
-        // Retornar la vista con los activos y el término de búsqueda para conservar el estado del formulario
+            
         return view('activos.index', compact('activos', 'search'));
     }
 
