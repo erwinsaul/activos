@@ -9,6 +9,16 @@
     <div class="mb-3">
         <a href="{{ route('bajas.index') }}" class="btn btn-secondary">Listar Todas las Bajas</a>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{ route('activos.index') }}" method="GET" class="form-inline">
+                <div class="form-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar Activos">
+                </div>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
